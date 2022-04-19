@@ -26,28 +26,7 @@ pipeline {
             }
 
             steps {
-                rtMavenDeployer (
-                        id: "maven-deployer",
-                        serverId: "prum-artifactory",
-                        releaseRepo: "maven-releases",
-                        snapshotRepo: "maven-snapshots"
-                )
-                rtMavenResolver(
-                        id: "maven-resolver",
-                        serverId: "prum-artifactory",
-                        releaseRepo: "maven-deploy-release",
-                        snapshotRepo: "maven-deploy-snapshot"
-                )
-                rtMavenRun (
-                        pom: 'pom.xml',
-                        goals: 'javadoc:javadoc javadoc:jar source:jar install -B -DskipTests',
-                        deployerId: "maven-deployer",
-                        resolverId: "maven-resolver"
-                )
-                rtPublishBuildInfo (
-                        serverId: "prum-artifactory"
-                )
-                step([$class: 'JavadocArchiver', javadocDir: 'target/site/apidocs', keepAll: false])
+                nexusPublisher nexusInstanceId: 'local', nexusRepositoryId: 'maven-snapshots', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: 'target/nukkit-*-SNAPSHOT.jar']], mavenCoordinate: [artifactId: 'nukkit', groupId: 'cn.nukkit', packaging: 'pom', version: '1.0-SNAPSHOT']]]
             }
         }
     }
