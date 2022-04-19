@@ -128,7 +128,7 @@ public class Player extends EntityHuman implements CommandSender, InventoryHolde
 
     protected static final int RESOURCE_PACK_CHUNK_SIZE = 8 * 1024; // 8KB
 
-    protected final SourceInterface interfaz;
+    public final SourceInterface interfaz;
 
     public boolean playedBefore;
     public boolean spawned = false;
