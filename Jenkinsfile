@@ -21,10 +21,6 @@ pipeline {
         }
 
         stage ('Deploy') {
-            when {
-                branch "master"
-            }
-
             steps {
                 nexusPublisher nexusInstanceId: 'local', nexusRepositoryId: 'maven-snapshots', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: 'target/nukkit-*-SNAPSHOT.jar']], mavenCoordinate: [artifactId: 'nukkit', groupId: 'cn.nukkit', packaging: 'pom', version: '1.0-SNAPSHOT']]]
             }
