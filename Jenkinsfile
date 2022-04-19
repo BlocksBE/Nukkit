@@ -28,13 +28,13 @@ pipeline {
             steps {
                 rtMavenDeployer (
                         id: "maven-deployer",
-                        serverId: "opencollab-artifactory",
+                        serverId: "prum-artifactory",
                         releaseRepo: "maven-releases",
                         snapshotRepo: "maven-snapshots"
                 )
                 rtMavenResolver(
                         id: "maven-resolver",
-                        serverId: "opencollab-artifactory",
+                        serverId: "prum-artifactory",
                         releaseRepo: "maven-deploy-release",
                         snapshotRepo: "maven-deploy-snapshot"
                 )
@@ -45,7 +45,7 @@ pipeline {
                         resolverId: "maven-resolver"
                 )
                 rtPublishBuildInfo (
-                        serverId: "opencollab-artifactory"
+                        serverId: "prum-artifactory"
                 )
                 step([$class: 'JavadocArchiver', javadocDir: 'target/site/apidocs', keepAll: false])
             }
