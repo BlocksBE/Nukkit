@@ -19,11 +19,5 @@ pipeline {
                 }
             }
         }
-
-        stage ('Deploy') {
-            steps {
-                nexusPublisher nexusInstanceId: 'local', nexusRepositoryId: 'maven-snapshots', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: 'target/nukkit-1.0-SNAPSHOT.jar']], mavenCoordinate: [artifactId: 'nukkit', groupId: 'cn.nukkit', packaging: 'jar', version: '1.0-SNAPSHOT']]]
-            }
-        }
     }
 }
